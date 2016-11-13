@@ -24,23 +24,27 @@
 require 'pry'
 
 class Game
-  attr_reader :player1, :player2, :current_turn
+  attr_reader :player1, :player2, :current_player
 
-    #attr_accessor:
   def initialize
     puts "Player 1, please enter name: "
     player1name = gets.chomp
     @player1 = Player.new(player1name)
     puts "Player 2, please enter name: "
-
-    #things you'll need in game
+    player2name = gets.chomp
+    @player2 = Player.new(player2name)
+    @current_player = @player1
   end
 
-  # def new question - prompt user
+  def start
+    while @player1.lives > 0 && @player2.lives > 0
+      ask_question
+    end
+      puts "#{@current_player.name} is a loser!"
+  end
 
-  #def verify answer
-
+  def switch_player
+    if @current_player == @player1
+      @current_player
 end
-
-
 
