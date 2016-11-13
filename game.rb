@@ -1,25 +1,6 @@
 # ----------------------------GAME.RB---------------------------------------------
 
 # --------------------------
-# |         GAME           |
-# --------------------------
-# | Properties             |
-# | ----------             |
-# | @player1               |
-# | @player2               |
-# | @is_running            | # Boolean. Start = True, End = False
-# |                        |
-# | Methods                |
-# | ----------             |
-# | play                   |
-# | turn_new               |
-# | input(str)             |
-# | output(str)            |
-# | generate_scores(str)   |
-# | turn_new               | # 5. Switch Turns, Loop ends
-# --------------------------
-# * @question # can be in turn or game, your decision
-# * @turn # your decision
 
 require 'pry'
 
@@ -38,13 +19,38 @@ class Game
 
   def start
     while @player1.lives > 0 && @player2.lives > 0
-      ask_question
+      question
     end
       puts "#{@current_player.name} is a loser!"
   end
 
   def switch_player
     if @current_player == @player1
-      @current_player
+      @current_player = @player2
+      puts "#{current_player.name}'s turn!"
+  end
+end
+
+  def question
+    new_question = Question.new
+    puts
+    puts "#{new_question.generate_question}"
+    player_answer = gets.chomp
+    check = new_question.verify_answer(player_answer)
+    if check == true
+      puts "You dun did good."
+      puts "#{@current_player.name} score: #{current_player.lives}"
+    else
+      puts
+      puts "WRONG."
+      @current_player.lives -= 1
+      puts
+      puts "#{current_player.name}'s score: #{current_player.lives}"
+      puts
+    end
+
+  switch_player
+
+  end
 end
 

@@ -11,4 +11,9 @@
 # ----------------------------MAIN.RB---------------------------------------------
 # This files your entry point for game
 
-# Needs to require all files
+require_relative 'game'
+require_relative 'player'
+require_relative 'question'
+
+game = Game.new
+game.start
